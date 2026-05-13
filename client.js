@@ -1,123 +1,75 @@
-/**
- * fitness-dashboard / api/client.js
- *
- * Auth:    Bearer token stored in localStorage under 'fc_token'
- * Base URL: set FC_API_URL in .env (defaults to localhost:8001 for local dev)
- *
- * Two helpers exported:
- *   apiFetch(path, options?)  → standard JSON endpoints
- *   apiStream(path, body, onChunk, onDone, onError)  → SSE for coach / regenerate / sync
- */
+const BASE = import.meta.env.VITE_API_URL ?? 'https://fitness.shiloenterprises.com/api';
 
-const BASE = import.meta.env.VITE_API_URL ?? 'http://127.0.0.1:8001';
-
-// ─── Token helpers ───────────────────────────────────────────────────────────
-export const getToken = () => localStorage.getItem('fc_token') ?? '';
+const token = () => localStorage.getItem('fc_token') ?? '';
 export const setToken = (t) => localStorage.setItem('fc_token', t);
-export const clearToken = () => localStorage.removeItem('fc_token');
 
-function authHeaders(extra = {}) {
-  return {
-    'Authorization': `Bearer ${getToken()}`,
-    'Content-Type': 'application/json',
-    ...extra,
-  };
-}
+const headers = () => ({
+  'Authorization': `Bearer ${token()}`,
+  'Content-Type': 'application/json',
+});
 
-// ─── Standard JSON fetch ─────────────────────────────────────────────────────
-/**
- * @param {string} path  e.g. '/api/state/recovery'
- * @param {RequestInit} [opts]
- * @returns {Promise<any>}
- * @throws {ApiError}
- */
-export async function apiFetch(path, opts = {}) {
-  const res = await fetch(`${BASE}${path}`, {
-    ...opts,
-    headers: authHeaders(opts.headers ?? {}),
-  });
+const get  = (path)       => fetch(`${BASE}${path}`, { headers: headers() }).then(r => r.json());
+const post = (path, body) => fetch(`${BASE}${path}`, { method: 'POST', headers: headers(), body: JSON.stringify(body) }).then(r => r.json());
 
-  if (!res.ok) {
-    const body = await res.json().catch(() => ({}));
-    throw new ApiError(res.status, body.detail ?? res.statusText, body);
-  }
+// ─── GETs ────────────────────────────────────────────────────────────────────
+export const getBrief       = ()           => get('/api/brief/today');
+export const getRecovery    = ()           => get('/api/state/recovery');
+export const getMacros      = ()           => get('/api/state/macros');
+export const getRotation    = ()           => get('/api/state/rotation');
+export const getFasting     = ()           => get('/api/state/fasting');
+export const getCalendar    = ()           => get('/api/calendar/today');
+export const getWeightTrend = (days = 30) => get(`/api/trend/weight?days=${days}`);
+export const getSleepTrend  = (days = 14) => get(`/api/trend/sleep?days=${days}`);
+export const getMacrosTrend = (days = 14) => get(`/api/trend/macros?days=${days}`);
+export const getTrainingSplit  = ()        => get('/api/training/split');
+export const getDietTemplates  = ()        => get('/api/diet/templates');
+export const getHealth  = ()        => get('/api/health');
+export const getSettings  = ()        => get('/api/settings');
+export const getServer  = ()        => get('/api/events/stream');
+export const getJob  = ()        => get('/api/jobs/<id>');
 
-  return res.json();
-}
-
-// ─── SSE streaming fetch ─────────────────────────────────────────────────────
-/**
- * For endpoints that stream Server-Sent Events (coach, brief/regenerate, sync).
- * The server should emit:
- *   data: {"delta": "…partial text…"}
- *   data: {"done": true, "full": "…complete text…", "latency_ms": 4127}
- *   data: {"error": "…message…"}
- *
- * @param {string} path
- * @param {object} body          POST body
- * @param {(delta: string) => void} onChunk   called with each text fragment
- * @param {(full: object) => void}  onDone    called with the final payload
- * @param {(err: ApiError) => void} onError
- * @returns {() => void}  call to abort the stream
- */
-export function apiStream(path, body, onChunk, onDone, onError) {
+// ─── POSTs ───────────────────────────────────────────────────────────────────
+export const logDone        = (day, note, date)  => post('/api/log/done',       { day, note, date });
+export const logWeight      = (weight_lb, date)  => post('/api/log/weight',     { weight_lb, date });
+export const logFastStart   = (time, date)       => post('/api/log/fast/start', { time, date });
+export const logFastEnd     = (time, date)       => post('/api/log/fast/end',   { time, date });
+ 
+// ─── POSTs with streaming (SSE) ──────────────────────────────────────────────
+// onChunk(deltaText) fires as text streams in
+// onDone(finalPayload) fires when complete
+// returns a cancel() function
+const stream = (path, body, onChunk, onDone) => {
   const ctrl = new AbortController();
-
-  (async () => {
-    let res;
-    try {
-      res = await fetch(`${BASE}${path}`, {
-        method: 'POST',
-        headers: authHeaders(),
-        body: JSON.stringify(body),
-        signal: ctrl.signal,
-      });
-    } catch (e) {
-      if (e.name !== 'AbortError') onError(new ApiError(0, e.message));
-      return;
-    }
-
-    if (!res.ok) {
-      const b = await res.json().catch(() => ({}));
-      onError(new ApiError(res.status, b.detail ?? res.statusText, b));
-      return;
-    }
-
+  fetch(`${BASE}${path}`, {
+    method: 'POST', headers: headers(),
+    body: JSON.stringify(body), signal: ctrl.signal,
+  }).then(async (res) => {
     const reader = res.body.getReader();
     const dec = new TextDecoder();
     let buf = '';
-
     while (true) {
       const { value, done } = await reader.read();
       if (done) break;
       buf += dec.decode(value, { stream: true });
-      const lines = buf.split('\n');
-      buf = lines.pop(); // keep incomplete last line
-
-      for (const line of lines) {
+      for (const line of buf.split('\n')) {
         if (!line.startsWith('data: ')) continue;
-        const json = line.slice(6).trim();
-        if (json === '[DONE]') continue;
         try {
-          const msg = JSON.parse(json);
-          if (msg.error)  { onError(new ApiError(500, msg.error)); return; }
-          if (msg.done)   { onDone(msg); return; }
-          if (msg.delta)  { onChunk(msg.delta); }
-        } catch { /* malformed line, skip */ }
+          const msg = JSON.parse(line.slice(6));
+          if (msg.delta) onChunk(msg.delta);
+          if (msg.done)  onDone(msg);
+        } catch {}
       }
+      buf = buf.includes('\n') ? buf.split('\n').pop() : buf;
     }
-  })();
-
+  }).catch(() => {});
   return () => ctrl.abort();
-}
-
-// ─── Error class ─────────────────────────────────────────────────────────────
-export class ApiError extends Error {
-  constructor(status, message, body = {}) {
-    super(message);
-    this.status = status;
-    this.body = body;
-    // Surface the MFP-cookie error so the UI can show the specific warning
-    this.isMfpAuthError = status === 401 && (body.source === 'mfp' || message.includes('MFP'));
-  }
-}
+};
+ 
+export const streamCoachNext = (onChunk, onDone)              => stream('/api/coach/next',       {},             onChunk, onDone);
+export const streamCoachMeal = (slot, hint, onChunk, onDone)  => stream('/api/coach/meal',       { slot, hint }, onChunk, onDone);
+export const streamCoachMenu = (place, onChunk, onDone)       => stream('/api/coach/menu',       { place },      onChunk, onDone);
+export const streamSync      = (sources, onChunk, onDone)     => stream('/api/sync',             { sources },    onChunk, onDone);
+export const streamRegenBrief= (onChunk, onDone)              => stream('/api/brief/regenerate', {},             onChunk, onDone);
+ 
+export const subscribePush   = (subscription)                 => post('/api/push/subscribe',     { subscription });
+ 
