@@ -203,7 +203,7 @@ export default function FitnessDashboard() {
   useEffect(() => {
     refresh();
     const t = setInterval(() => setNow(new Date()), 60000);
-    const r = setInterval(refresh, 5 * 60 * 1000);
+    const r = setInterval(refresh, 15 * 60 * 1000);
     return () => { clearInterval(t); clearInterval(r); };
   }, []);
 
