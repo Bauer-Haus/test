@@ -690,146 +690,56 @@ export default function FitnessDashboard() {
             avg={rhrAvg} color={COLORS.fat} />
           <Stat icon={Battery} label="Body Battery" value={batteryHigh} unit="peak"
             avg={batteryLow ? `low ${batteryLow}` : null} color={COLORS.accent} />
+          <Stat icon={Activity} label="Steps" value={steps != null ? (steps > 999 ? `${(steps / 1000).toFixed(1)}k` : steps) : null}
+            avg={stepsGoal ? `goal ${stepsGoal > 999 ? `${(stepsGoal / 1000).toFixed(0)}k` : stepsGoal}` : null}
+            color={COLORS.good} />
         </div>
       </div>
     ),
 
     recovery: (
       <div style={{ padding: '20px' }}>
-        <div className="grid grid-cols-12 gap-5">
-          {/* Today's plan */}
-          <div className="col-span-12 lg:col-span-5">
-            <div className="relative grain overflow-hidden rounded-3xl p-7 h-full border"
-              style={{ background: `linear-gradient(135deg, ${COLORS.surface} 0%, ${COLORS.surfaceHi} 100%)`, borderColor: COLORS.border }}>
-              <div className="flex items-center gap-2 mb-6">
-                <span className="w-1.5 h-1.5 rounded-full pulse-dot" style={{ background: COLORS.accent }} />
-                <span className="text-[10px] uppercase tracking-[0.2em]"
-                  style={{ color: COLORS.accent, fontFamily: 'var(--font-mono)' }}>Today</span>
+        <div className="rounded-3xl p-7 border flex flex-col items-center"
+          style={{ background: COLORS.surface, borderColor: COLORS.border }}>
+          <div className="flex flex-col items-center justify-center my-2">
+            <Ring value={readiness ?? 0} size={240} stroke={14} color={COLORS.accent}>
+              <div className="text-[10px] uppercase tracking-[0.18em]"
+                style={{ color: COLORS.textDim, fontFamily: 'var(--font-mono)' }}>Readiness</div>
+              <div className="text-7xl leading-none my-1"
+                style={{ fontFamily: 'var(--font-display)', color: COLORS.text, fontVariantNumeric: 'tabular-nums' }}>
+                {readiness ?? '—'}
               </div>
-
-              <div className="mb-7">
-                <div className="text-[11px] uppercase tracking-[0.16em] mb-2"
-                  style={{ color: COLORS.textDim, fontFamily: 'var(--font-mono)' }}>
-                  Training · Day {todayDay ?? '—'}
-                </div>
-                <h2 className="text-5xl leading-[0.95] mb-3 tracking-tight"
-                  style={{ fontFamily: 'var(--font-display)', fontWeight: 400 }}>
-                  {todayTitle.split('+')[0]?.trim() || 'Loading'}
-                  {todayTitle.includes('+') && <span style={{ fontStyle: 'italic', color: COLORS.textDim }}> & {todayTitle.split('+')[1]?.trim()}</span>}
-                </h2>
-                <div className="flex items-center flex-wrap gap-x-5 gap-y-1.5 text-sm" style={{ color: COLORS.textDim }}>
-                  {todayTime && <span className="flex items-center gap-1.5"><Clock size={12} /> {todayTime}</span>}
-                  {todayLocation && <span className="flex items-center gap-1.5"><MapPin size={12} /> {todayLocation}</span>}
-                  {todaySets && (
-                    <span className="flex items-center gap-1.5">
-                      <Dumbbell size={12} /> {todaySets} sets
-                      {todayDuration != null && (
-                        <> · {Array.isArray(todayDuration) ? todayDuration.join('–') : todayDuration} min</>
-                      )}
-                    </span>
-                  )}
-                </div>
+              <div className="text-xs uppercase tracking-[0.15em] flex items-center gap-1.5"
+                style={{ color: COLORS.accent, fontFamily: 'var(--font-mono)' }}>
+                <span className="w-1 h-1 rounded-full" style={{ background: COLORS.accent }} />
+                {readinessLvl ?? '—'}
               </div>
+            </Ring>
+          </div>
 
-              <div className="grid grid-cols-2 gap-3 mb-6">
-                <div className="rounded-xl p-4 border" style={{ background: COLORS.bg, borderColor: COLORS.border }}>
-                  <div className="text-[10px] uppercase tracking-wider mb-1"
-                    style={{ color: COLORS.textFaint, fontFamily: 'var(--font-mono)' }}>First lift</div>
-                  <div className="text-sm leading-tight" style={{ color: COLORS.text }}>
-                    {firstLiftName ?? '—'}
-                  </div>
-                  <div className="text-2xl mt-1"
-                    style={{ fontFamily: 'var(--font-display)', color: COLORS.accent, fontVariantNumeric: 'tabular-nums' }}>
-                    {firstLiftWt ?? '—'} <span className="text-xs" style={{ color: COLORS.textFaint, fontFamily: 'var(--font-mono)' }}>lb</span>
-                  </div>
-                </div>
-                <div className="rounded-xl p-4 border" style={{ background: COLORS.bg, borderColor: COLORS.border }}>
-                  <div className="text-[10px] uppercase tracking-wider mb-1"
-                    style={{ color: COLORS.textFaint, fontFamily: 'var(--font-mono)' }}>
-                    {inWindow ? 'Eating window' : 'Fast ends in'}
-                  </div>
-                  <div className="text-sm leading-tight" style={{ color: COLORS.text }}>
-                    {inWindow ? 'Open now' : `Opens at ${fasting?.next_window_open?.slice(11, 16) ?? 'noon'}`}
-                  </div>
-                  <div className="text-2xl mt-1"
-                    style={{ fontFamily: 'var(--font-display)', color: COLORS.text, fontVariantNumeric: 'tabular-nums' }}>
-                    {fastingHours}<span className="text-base" style={{ color: COLORS.textDim }}>h</span> {fastingMins}<span className="text-base" style={{ color: COLORS.textDim }}>m</span>
-                  </div>
-                </div>
+          <div className="grid grid-cols-3 gap-1 w-full pt-4 border-t" style={{ borderColor: COLORS.border, maxWidth: '360px' }}>
+            <div className="text-center">
+              <div className="text-[9px] uppercase tracking-wider mb-1"
+                style={{ color: COLORS.textFaint, fontFamily: 'var(--font-mono)' }}>Battery</div>
+              <div className="text-base" style={{ fontFamily: 'var(--font-display)', color: COLORS.text }}>
+                {batteryStart ?? '—'}→{batteryEnd ?? '—'}
               </div>
-
-              {/* Calendar strip */}
-              <div className="space-y-1.5">
-                <div className="text-[10px] uppercase tracking-[0.16em] mb-2"
-                  style={{ color: COLORS.textFaint, fontFamily: 'var(--font-mono)' }}>Schedule</div>
-                {events.length === 0 ? (
-                  <div className="text-xs" style={{ color: COLORS.textFaint }}>No events</div>
-                ) : events.map((e, i) => (
-                  <div key={i} className="flex items-center gap-3 py-2 px-3 rounded-lg"
-                    style={{
-                      background: e.isWorkout ? `${COLORS.accent}0a` : 'transparent',
-                      border: e.isWorkout ? `1px solid ${COLORS.accent}25` : '1px solid transparent',
-                    }}>
-                    <span className="text-[10px] w-16 shrink-0"
-                      style={{ color: COLORS.textDim, fontFamily: 'var(--font-mono)' }}>{e.t}</span>
-                    <span className="text-sm flex-1 truncate"
-                      style={{ color: e.isWorkout ? COLORS.accent : COLORS.text }}>{e.title}</span>
-                  </div>
-                ))}
+            </div>
+            <div className="text-center border-l border-r" style={{ borderColor: COLORS.border }}>
+              <div className="text-[9px] uppercase tracking-wider mb-1"
+                style={{ color: COLORS.textFaint, fontFamily: 'var(--font-mono)' }}>Stress</div>
+              <div className="text-base" style={{ fontFamily: 'var(--font-display)', color: COLORS.text }}>
+                {stressAvg ?? '—'}<span className="text-[10px]" style={{ color: COLORS.textFaint }}>/100</span>
+              </div>
+            </div>
+            <div className="text-center">
+              <div className="text-[9px] uppercase tracking-wider mb-1"
+                style={{ color: COLORS.textFaint, fontFamily: 'var(--font-mono)' }}>Steps</div>
+              <div className="text-base" style={{ fontFamily: 'var(--font-display)', color: COLORS.text }}>
+                {steps != null ? (steps > 999 ? `${(steps / 1000).toFixed(1)}k` : steps) : '—'}
               </div>
             </div>
           </div>
-
-          {/* Recovery ring */}
-          <div className="col-span-12 lg:col-span-4">
-            <div className="relative h-full rounded-3xl p-7 border flex flex-col items-center"
-              style={{ background: COLORS.surface, borderColor: COLORS.border }}>
-              <SectionLabel>Recovery</SectionLabel>
-
-              <div className="flex-1 flex flex-col items-center justify-center my-2">
-                <Ring value={readiness ?? 0} size={240} stroke={14} color={COLORS.accent}>
-                  <div className="text-[10px] uppercase tracking-[0.18em]"
-                    style={{ color: COLORS.textDim, fontFamily: 'var(--font-mono)' }}>Readiness</div>
-                  <div className="text-7xl leading-none my-1"
-                    style={{ fontFamily: 'var(--font-display)', color: COLORS.text, fontVariantNumeric: 'tabular-nums' }}>
-                    {readiness ?? '—'}
-                  </div>
-                  <div className="text-xs uppercase tracking-[0.15em] flex items-center gap-1.5"
-                    style={{ color: COLORS.accent, fontFamily: 'var(--font-mono)' }}>
-                    <span className="w-1 h-1 rounded-full" style={{ background: COLORS.accent }} />
-                    {readinessLvl ?? '—'}
-                  </div>
-                </Ring>
-              </div>
-
-              <div className="grid grid-cols-3 gap-1 w-full pt-4 border-t" style={{ borderColor: COLORS.border }}>
-                <div className="text-center">
-                  <div className="text-[9px] uppercase tracking-wider mb-1"
-                    style={{ color: COLORS.textFaint, fontFamily: 'var(--font-mono)' }}>Battery</div>
-                  <div className="text-base" style={{ fontFamily: 'var(--font-display)', color: COLORS.text }}>
-                    {batteryStart ?? '—'}→{batteryEnd ?? '—'}
-                  </div>
-                </div>
-                <div className="text-center border-l border-r" style={{ borderColor: COLORS.border }}>
-                  <div className="text-[9px] uppercase tracking-wider mb-1"
-                    style={{ color: COLORS.textFaint, fontFamily: 'var(--font-mono)' }}>Stress</div>
-                  <div className="text-base" style={{ fontFamily: 'var(--font-display)', color: COLORS.text }}>
-                    {stressAvg ?? '—'}<span className="text-[10px]" style={{ color: COLORS.textFaint }}>/100</span>
-                  </div>
-                </div>
-                <div className="text-center">
-                  <div className="text-[9px] uppercase tracking-wider mb-1"
-                    style={{ color: COLORS.textFaint, fontFamily: 'var(--font-mono)' }}>Steps</div>
-                  <div className="text-base" style={{ fontFamily: 'var(--font-display)', color: COLORS.text }}>
-                    {steps != null ? (steps > 999 ? `${(steps / 1000).toFixed(1)}k` : steps) : '—'}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Placeholder col for spacing */}
-          <div className="col-span-12 lg:col-span-3" />
         </div>
       </div>
     ),
