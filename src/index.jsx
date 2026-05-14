@@ -690,9 +690,6 @@ export default function FitnessDashboard() {
             avg={rhrAvg} color={COLORS.fat} />
           <Stat icon={Battery} label="Body Battery" value={batteryHigh} unit="peak"
             avg={batteryLow ? `low ${batteryLow}` : null} color={COLORS.accent} />
-          <Stat icon={Activity} label="Steps" value={steps != null ? (steps > 999 ? `${(steps / 1000).toFixed(1)}k` : steps) : null}
-            avg={stepsGoal ? `goal ${stepsGoal > 999 ? `${(stepsGoal / 1000).toFixed(0)}k` : stepsGoal}` : null}
-            color={COLORS.good} />
         </div>
       </div>
     ),
