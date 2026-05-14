@@ -1,34 +1,29 @@
 // ─── MOCK TOGGLE ─────────────────────────────────────────────────────────────
-// Set to true to read from local sample JSON files in /src/mocks/.
-// Set to false to hit the real backend at VITE_API_URL.
+// true  → reads sample JSON from /src/mocks/
+// false → hits real backend at VITE_API_URL
 const USE_MOCKS = true;
 
-// ─── Mock imports (only used when USE_MOCKS=true) ────────────────────────────
-import mockBrief     from './mocks/brief-today.json';
-import mockRecovery  from './mocks/state-recovery.json';
-import mockMacros    from './mocks/state-macros.json';
-import mockTraining  from './mocks/training-split.json';
-import mockCoachMeal from './mocks/coach-meal.json';
-
-// Stubs for endpoints we don't have sample files for yet
-const mockRotation = { today: '2026-04-30', state: 'REST_DAY',
-  last_session: { date: '2026-04-29', day: 'A', note: 'Push + run.' },
-  next_session: { day: 'B', title: 'Upper Pull + Run', scheduled_time: '10:00 AM',
-    first_lift: { name: 'Single-arm seated cable row', top_working_weight_lb: 180 },
-    total_working_sets: 19, duration_estimate_minutes: [55, 60] } };
-const mockFasting = { in_window: false, phase: 'fasting',
-  next_window_open: '2026-05-01T12:00:00-05:00', minutes_until_open: 810 };
-const mockCalendar = { date: '2026-04-30', events: [
-  { title: 'Workout: Day B (Pull + Run)', start: '2026-04-30T10:00:00-05:00',
-    end: '2026-04-30T11:30:00-05:00', all_day: false, calendar: 'Personal',
-    location: 'Lifetime Fitness' }] };
-const mockWeight = { window: { start: '2026-04-01', end: '2026-04-30', days: 30 },
-  points: [
-    { date: '2026-04-01', weight_lb: 215.0 }, { date: '2026-04-08', weight_lb: 212.3 },
-    { date: '2026-04-15', weight_lb: 209.4 }, { date: '2026-04-22', weight_lb: 207.1 },
-    { date: '2026-04-29', weight_lb: 205.2 }, { date: '2026-04-30', weight_lb: 204.7 },
-  ],
-  summary: { earliest_lb: 215.0, latest_lb: 204.7, delta_lb: -10.3, rolling_7day_avg_lb: 205.8 } };
+// ─── Mock imports ────────────────────────────────────────────────────────────
+import mockBrief        from './mocks/brief-today.json';
+import mockCalendar     from './mocks/calendar-today.json';
+import mockCoachMeal    from './mocks/coach-meal.json';
+import mockCoachMenu    from './mocks/coach-menu.json';
+import mockCoachNext    from './mocks/coach-next.json';
+import mockDiet         from './mocks/diet-templates.json';
+import mockHealth       from './mocks/health.json';
+import mockLogDone      from './mocks/log-done-response.json';
+import mockLogFast      from './mocks/log-fast-response.json';
+import mockLogWeight    from './mocks/log-weight-response.json';
+import mockSettings     from './mocks/settings.json';
+import mockFasting      from './mocks/state-fasting.json';
+import mockMacros       from './mocks/state-macros.json';
+import mockRecovery     from './mocks/state-recovery.json';
+import mockRotation     from './mocks/state-rotation.json';
+import mockSync         from './mocks/sync.json';
+import mockTraining     from './mocks/training-split.json';
+import mockTrendMacros  from './mocks/trend-macros.json';
+import mockTrendSleep   from './mocks/trend-sleep.json';
+import mockWeight       from './mocks/trend-weight.json';
 
 // ─── Real backend config ─────────────────────────────────────────────────────
 const BASE = import.meta.env.VITE_API_URL ?? 'http://127.0.0.1:8001';
@@ -40,30 +35,34 @@ const post = (path, body) => fetch(`${BASE}${path}`, { method: 'POST', headers: 
 const mock = (data, ms = 200) => new Promise(r => setTimeout(() => r(data), ms));
 
 // ─── GETs ────────────────────────────────────────────────────────────────────
-export const getBrief         = ()         => USE_MOCKS ? mock(mockBrief)    : get('/api/brief/today');
-export const getRecovery      = ()         => USE_MOCKS ? mock(mockRecovery) : get('/api/state/recovery');
-export const getMacros        = ()         => USE_MOCKS ? mock(mockMacros)   : get('/api/state/macros');
-export const getRotation      = ()         => USE_MOCKS ? mock(mockRotation) : get('/api/state/rotation');
-export const getFasting       = ()         => USE_MOCKS ? mock(mockFasting)  : get('/api/state/fasting');
-export const getCalendar      = ()         => USE_MOCKS ? mock(mockCalendar) : get('/api/calendar/today');
-export const getWeightTrend   = (days=30)  => USE_MOCKS ? mock(mockWeight)   : get(`/api/trend/weight?days=${days}`);
-export const getSleepTrend    = (days=14)  => USE_MOCKS ? mock({})           : get(`/api/trend/sleep?days=${days}`);
-export const getMacrosTrend   = (days=14)  => USE_MOCKS ? mock({})           : get(`/api/trend/macros?days=${days}`);
-export const getTrainingSplit = ()         => USE_MOCKS ? mock(mockTraining) : get('/api/training/split');
-export const getDietTemplates = ()         => USE_MOCKS ? mock({})           : get('/api/diet/templates');
+export const getBrief         = ()        => USE_MOCKS ? mock(mockBrief)       : get('/api/brief/today');
+export const getRecovery      = ()        => USE_MOCKS ? mock(mockRecovery)    : get('/api/state/recovery');
+export const getMacros        = ()        => USE_MOCKS ? mock(mockMacros)      : get('/api/state/macros');
+export const getRotation      = ()        => USE_MOCKS ? mock(mockRotation)    : get('/api/state/rotation');
+export const getFasting       = ()        => USE_MOCKS ? mock(mockFasting)     : get('/api/state/fasting');
+export const getCalendar      = ()        => USE_MOCKS ? mock(mockCalendar)    : get('/api/calendar/today');
+export const getWeightTrend   = (days=30) => USE_MOCKS ? mock(mockWeight)      : get(`/api/trend/weight?days=${days}`);
+export const getSleepTrend    = (days=14) => USE_MOCKS ? mock(mockTrendSleep)  : get(`/api/trend/sleep?days=${days}`);
+export const getMacrosTrend   = (days=14) => USE_MOCKS ? mock(mockTrendMacros) : get(`/api/trend/macros?days=${days}`);
+export const getTrainingSplit = ()        => USE_MOCKS ? mock(mockTraining)    : get('/api/training/split');
+export const getDietTemplates = ()        => USE_MOCKS ? mock(mockDiet)        : get('/api/diet/templates');
+export const getHealth        = ()        => USE_MOCKS ? mock(mockHealth)      : get('/health');
+export const getSettings      = ()        => USE_MOCKS ? mock(mockSettings)    : get('/api/settings');
 
 // ─── POSTs ───────────────────────────────────────────────────────────────────
-export const logDone      = (day, note, date) => USE_MOCKS ? mock({ status: 'logged', day }) : post('/api/log/done',       { day, note, date });
-export const logWeight    = (weight_lb, date) => USE_MOCKS ? mock({ status: 'logged' })      : post('/api/log/weight',     { weight_lb, date });
-export const logFastStart = (time, date)      => USE_MOCKS ? mock({ status: 'logged' })      : post('/api/log/fast/start', { time, date });
-export const logFastEnd   = (time, date)      => USE_MOCKS ? mock({ status: 'logged' })      : post('/api/log/fast/end',   { time, date });
+export const logDone      = (day, note, date) => USE_MOCKS ? mock(mockLogDone)   : post('/api/log/done',       { day, note, date });
+export const logWeight    = (weight_lb, date) => USE_MOCKS ? mock(mockLogWeight) : post('/api/log/weight',     { weight_lb, date });
+export const logFastStart = (time, date)      => USE_MOCKS ? mock(mockLogFast)   : post('/api/log/fast/start', { time, date });
+export const logFastEnd   = (time, date)      => USE_MOCKS ? mock(mockLogFast)   : post('/api/log/fast/end',   { time, date });
 
 // ─── Streaming POSTs (SSE) ───────────────────────────────────────────────────
-const mockStream = (text, onChunk, onDone) => {
+// Streams a string word-by-word to simulate live token streaming.
+const mockStream = (final, onChunk, onDone) => {
+  const text = final.spoken_summary || final.message || 'Done.';
   const words = text.split(' ');
   let i = 0;
   const id = setInterval(() => {
-    if (i >= words.length) { clearInterval(id); onDone({ spoken_summary: text, done: true }); return; }
+    if (i >= words.length) { clearInterval(id); onDone({ ...final, done: true }); return; }
     onChunk(words[i] + ' '); i++;
   }, 40);
   return () => clearInterval(id);
@@ -95,23 +94,23 @@ const stream = (path, body, onChunk, onDone) => {
 };
 
 export const streamCoachNext = (onChunk, onDone) =>
-  USE_MOCKS ? mockStream("Today is rest. Tomorrow is Day B at 10 AM. First lift is single-arm cable row at 180. After strength, get a 30-minute Peloton at Z2.", onChunk, onDone)
+  USE_MOCKS ? mockStream(mockCoachNext, onChunk, onDone)
             : stream('/api/coach/next', {}, onChunk, onDone);
 
 export const streamCoachMeal = (slot, hint, onChunk, onDone) =>
-  USE_MOCKS ? mockStream(mockCoachMeal.spoken_summary, onChunk, onDone)
+  USE_MOCKS ? mockStream(mockCoachMeal, onChunk, onDone)
             : stream('/api/coach/meal', { slot, hint }, onChunk, onDone);
 
 export const streamCoachMenu = (place, onChunk, onDone) =>
-  USE_MOCKS ? mockStream(`At ${place}: chicken bowl with brown rice, black beans, fajita veggies. Around 550 calories, 40 grams of protein.`, onChunk, onDone)
+  USE_MOCKS ? mockStream(mockCoachMenu, onChunk, onDone)
             : stream('/api/coach/menu', { place }, onChunk, onDone);
 
 export const streamSync = (sources, onChunk, onDone) =>
-  USE_MOCKS ? mockStream("Sync complete.", onChunk, onDone)
+  USE_MOCKS ? mockStream({ ...mockSync, spoken_summary: 'Sync complete.' }, onChunk, onDone)
             : stream('/api/sync', { sources }, onChunk, onDone);
 
 export const streamRegenBrief = (onChunk, onDone) =>
-  USE_MOCKS ? mockStream("Brief regenerated.", onChunk, onDone)
+  USE_MOCKS ? mockStream({ ...mockBrief, spoken_summary: 'Brief regenerated.' }, onChunk, onDone)
             : stream('/api/brief/regenerate', {}, onChunk, onDone);
 
 export const subscribePush = (subscription) =>
