@@ -1,0 +1,11 @@
+{
+  "slot": "lunch",
+  "spoken_summary": "Grilled chicken breast with roasted vegetables and a small portion of brown rice, approximately 480 calories and 50 grams of protein. This fits your remaining macros tightly and pushes you well toward the 150 gram protein floor for the day.",
+  "structured": {
+    "meal_state": "REST",
+    "low_recovery": false,
+    "remaining": { "calories": 905, "protein": 72, "carbs": 143, "fat": 27 }
+  },
+  "model_used": "llama3.1:latest",
+  "latency_ms": 2147
+}

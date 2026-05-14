@@ -1,0 +1,98 @@
+{
+  "doc_updated": "2026-04-12",
+  "rotation": ["A", "B", "C", "D"],
+  "days": {
+    "A": {
+      "title": "Upper Push + Run",
+      "purpose": "Heavy pressing for chest, shoulders, secondary tricep work.",
+      "working_sets": "13-16",
+      "duration_minutes": [55, 60],
+      "exercises": [
+        {
+          "name": "Flat bench press",
+          "sets": 4,
+          "rep_scheme": "10, 8, AMRAP, 10",
+          "rest_seconds": 120,
+          "working_weight_lb": [225, 275],
+          "notes": "AMRAP at 275+ when feeling it"
+        },
+        {
+          "name": "Plate-loaded military press machine",
+          "sets": 4,
+          "rep_scheme": "8-10",
+          "rest_seconds": 90,
+          "working_weight_lb": null,
+          "notes": "Fixed-path machine, foam-block lift-off assist"
+        },
+        {
+          "name": "Dumbbell lateral raises",
+          "sets": 3,
+          "rep_scheme": "12-15",
+          "rest_seconds": 60,
+          "working_weight_lb": [15, 25],
+          "notes": "Strict form, light weight"
+        },
+        {
+          "name": "Cable rope pushdown",
+          "sets": 2,
+          "rep_scheme": "12-15",
+          "rest_seconds": 60,
+          "working_weight_lb": null,
+          "notes": "Elbow-friendly tricep work"
+        }
+      ],
+      "run_plan": "30 min Peloton, Z2 or low-Z3",
+      "run_timing": "after_strength",
+      "minimum_viable": "Bench 3 working sets + lateral raises 3 sets + skip run."
+    },
+    "B": {
+      "title": "Upper Pull + Run",
+      "purpose": "Back, posterior shoulders, biceps. Reflects current routine with bicep volume trimmed and face pulls added.",
+      "working_sets": "19",
+      "duration_minutes": [55, 60],
+      "exercises": [
+        { "name": "Single-arm seated cable row", "sets": 4, "rep_scheme": "10 each side", "rest_seconds": 75, "working_weight_lb": [160, 180, 180, 160] },
+        { "name": "Incline bench pulls", "sets": 4, "rep_scheme": "10", "rest_seconds": 75, "working_weight_lb": [90, 115, 115, 90] },
+        { "name": "Seated lat pulldown", "sets": 4, "rep_scheme": "10", "rest_seconds": 90, "working_weight_lb": [160, 190, 180, 160] },
+        { "name": "Bent-over straight-arm pulldown", "sets": 4, "rep_scheme": "10", "rest_seconds": 75, "working_weight_lb": [185, 195, 195, 185] },
+        { "name": "Face pulls", "sets": 3, "rep_scheme": "15", "rest_seconds": 60, "working_weight_lb": null, "notes": "Light weight, strict form" },
+        { "name": "Standing cable bicep curl", "sets": 4, "rep_scheme": "10", "rest_seconds": 75, "working_weight_lb": [57.5, 72, 67, 57.5] },
+        { "name": "Seated EZ-bar curl machine", "sets": 4, "rep_scheme": "10", "rest_seconds": 75, "working_weight_lb": [90, 135, 135, 90] }
+      ],
+      "run_plan": "30 min Peloton, Z2 or interval",
+      "run_timing": "after_strength",
+      "minimum_viable": "Single-arm row 3 sets + lat pulldown 3 sets + face pulls 2 sets."
+    },
+    "C": {
+      "title": "Lower Body",
+      "purpose": "Bring legs back into rotation. No run on this day.",
+      "working_sets": "13-15",
+      "duration_minutes": [50, 60],
+      "exercises": [
+        { "name": "Leg press", "sets": 4, "rep_scheme": "10-12", "rest_seconds": 120, "working_weight_lb": null, "notes": "Build to moderate weight over weeks" },
+        { "name": "Goblet squat or Bulgarian split squat", "sets": 3, "rep_scheme": "10", "rest_seconds": 90, "working_weight_lb": null },
+        { "name": "Romanian deadlift (with straps)", "sets": 3, "rep_scheme": "10", "rest_seconds": 90, "working_weight_lb": [95, 135] },
+        { "name": "Seated leg curl", "sets": 3, "rep_scheme": "12", "rest_seconds": 60, "working_weight_lb": null },
+        { "name": "Standing or seated calf raise", "sets": 3, "rep_scheme": "15", "rest_seconds": 45, "working_weight_lb": null }
+      ],
+      "run_plan": null,
+      "run_timing": "none",
+      "minimum_viable": "Leg press 4 sets + leg curl 3 sets."
+    },
+    "D": {
+      "title": "Run / Core",
+      "purpose": "Run-focused day with light core work, or dedicated run + core combo.",
+      "working_sets": "6-8",
+      "duration_minutes": [45, 60],
+      "exercises": [
+        { "name": "Run: 35-45 min Peloton or treadmill", "sets": 1, "rep_scheme": "single block", "rest_seconds": null, "working_weight_lb": null, "notes": "Tempo, interval, or longer Z2" },
+        { "name": "Hanging knee raises", "sets": 3, "rep_scheme": "10-15", "rest_seconds": 60, "working_weight_lb": null },
+        { "name": "Plank", "sets": 3, "rep_scheme": "30-60s", "rest_seconds": 45, "working_weight_lb": null },
+        { "name": "Side plank", "sets": 2, "rep_scheme": "30s each side", "rest_seconds": 30, "working_weight_lb": null }
+      ],
+      "run_plan": "35-45 min Peloton or treadmill",
+      "run_timing": "run_only",
+      "minimum_viable": "30 min run + plank 2 sets."
+    }
+  }
+}
