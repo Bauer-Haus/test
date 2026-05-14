@@ -1,0 +1,42 @@
+{
+  "window": { "start": "2026-04-01", "end": "2026-04-30", "days": 30 },
+  "points": [
+    { "date": "2026-04-01", "weight_lb": 216.4, "source": "MFP" },
+    { "date": "2026-04-02", "weight_lb": 216.1, "source": "MFP" },
+    { "date": "2026-04-03", "weight_lb": 215.8, "source": "MFP" },
+    { "date": "2026-04-04", "weight_lb": null, "source": null },
+    { "date": "2026-04-05", "weight_lb": 215.6, "source": "MFP" },
+    { "date": "2026-04-06", "weight_lb": 215.9, "source": "MFP" },
+    { "date": "2026-04-07", "weight_lb": 215.4, "source": "MFP" },
+    { "date": "2026-04-08", "weight_lb": 215.1, "source": "MFP" },
+    { "date": "2026-04-09", "weight_lb": 214.8, "source": "MFP" },
+    { "date": "2026-04-10", "weight_lb": 214.6, "source": "MFP" },
+    { "date": "2026-04-11", "weight_lb": null, "source": null },
+    { "date": "2026-04-12", "weight_lb": 215.2, "source": "MFP" },
+    { "date": "2026-04-13", "weight_lb": 214.9, "source": "MFP" },
+    { "date": "2026-04-14", "weight_lb": 215.0, "source": "MFP" },
+    { "date": "2026-04-15", "weight_lb": 215.0, "source": "MFP" },
+    { "date": "2026-04-16", "weight_lb": 213.4, "source": "MFP" },
+    { "date": "2026-04-17", "weight_lb": 212.1, "source": "MFP" },
+    { "date": "2026-04-18", "weight_lb": 211.2, "source": "MFP" },
+    { "date": "2026-04-19", "weight_lb": 210.8, "source": "MFP" },
+    { "date": "2026-04-20", "weight_lb": 210.2, "source": "MFP" },
+    { "date": "2026-04-21", "weight_lb": 209.9, "source": "MFP" },
+    { "date": "2026-04-22", "weight_lb": 209.4, "source": "MFP" },
+    { "date": "2026-04-23", "weight_lb": 208.6, "source": "MFP" },
+    { "date": "2026-04-24", "weight_lb": 207.9, "source": "MFP" },
+    { "date": "2026-04-25", "weight_lb": 207.3, "source": "MFP" },
+    { "date": "2026-04-26", "weight_lb": 207.0, "source": "MFP" },
+    { "date": "2026-04-27", "weight_lb": 206.4, "source": "MFP" },
+    { "date": "2026-04-28", "weight_lb": 205.9, "source": "MFP" },
+    { "date": "2026-04-29", "weight_lb": 205.2, "source": "MFP" },
+    { "date": "2026-04-30", "weight_lb": 204.7, "source": "MFP" }
+  ],
+  "summary": {
+    "earliest_lb": 216.4,
+    "latest_lb": 204.7,
+    "delta_lb": -11.7,
+    "rolling_7day_avg_lb": 206.1,
+    "missing_days": 2
+  }
+}

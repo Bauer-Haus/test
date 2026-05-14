@@ -1,0 +1,16 @@
+{
+  "started_at": "2026-04-30T15:45:00-05:00",
+  "finished_at": "2026-04-30T15:45:11-05:00",
+  "results": {
+    "garmin": {
+      "ok": true,
+      "synced_dates": ["2026-04-30"],
+      "details": "sleep 75, hrv 32, rhr 58, weight 204.7"
+    },
+    "mfp": {
+      "ok": true,
+      "synced_dates": ["2026-04-30"],
+      "details": "cal=845, protein=78, meals=[lunch]"
+    }
+  }
+}

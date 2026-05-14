@@ -1,0 +1,11 @@
+{
+  "place": "Chipotle",
+  "inferred_slot": "lunch",
+  "spoken_summary": "Chicken burrito bowl with brown rice, black beans, fajita veggies, salsa, and guacamole. Roughly 580 calories and 45 grams of protein. Skip the cheese and sour cream to stay inside your remaining fat budget.",
+  "structured": {
+    "meal_state": "REST",
+    "remaining": { "calories": 905, "protein": 72 }
+  },
+  "model_used": "llama3.1:latest",
+  "latency_ms": 2891
+}

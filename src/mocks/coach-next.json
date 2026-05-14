@@ -1,0 +1,12 @@
+{
+  "state": "REST_DAY",
+  "spoken_summary": "Today is rest. Tomorrow is Day B at ten AM. Day B is your upper pull day, targeting back, posterior shoulders, and biceps. Expect around nineteen working sets in roughly fifty-five to sixty minutes. After strength, get in a thirty minute Peloton at Z2 or interval.",
+  "structured": {
+    "today_state": "REST_DAY",
+    "next_day_letter": "B",
+    "next_day_title": "Upper Pull + Run",
+    "scheduled_time": "10:00 AM",
+    "first_lift": { "name": "Single-arm seated cable row", "top_working_weight_lb": 180 }
+  },
+  "latency_ms": 3812
+}

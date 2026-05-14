@@ -1,0 +1,25 @@
+{
+  "window": { "start": "2026-04-17", "end": "2026-04-30", "days": 14 },
+  "points": [
+    { "date": "2026-04-17", "consumed": { "calories": 1721, "protein": 132, "carbs": 158, "fat": 62 }, "goals": { "calories": 1750, "protein": 130, "carbs": 175, "fat": 65 }, "adherence_pct": 98, "protein_floor_hit": true },
+    { "date": "2026-04-18", "consumed": { "calories": 1689, "protein": 138, "carbs": 142, "fat": 58 }, "goals": { "calories": 1750, "protein": 130, "carbs": 175, "fat": 65 }, "adherence_pct": 97, "protein_floor_hit": true },
+    { "date": "2026-04-19", "consumed": { "calories": 1542, "protein": 121, "carbs": 138, "fat": 52 }, "goals": { "calories": 1750, "protein": 130, "carbs": 175, "fat": 65 }, "adherence_pct": 88, "protein_floor_hit": false },
+    { "date": "2026-04-20", "consumed": { "calories": 1702, "protein": 144, "carbs": 152, "fat": 56 }, "goals": { "calories": 1750, "protein": 130, "carbs": 175, "fat": 65 }, "adherence_pct": 97, "protein_floor_hit": true },
+    { "date": "2026-04-21", "consumed": { "calories": 1645, "protein": 135, "carbs": 148, "fat": 54 }, "goals": { "calories": 1750, "protein": 130, "carbs": 175, "fat": 65 }, "adherence_pct": 94, "protein_floor_hit": true },
+    { "date": "2026-04-22", "consumed": { "calories": 1798, "protein": 148, "carbs": 168, "fat": 60 }, "goals": { "calories": 1750, "protein": 130, "carbs": 175, "fat": 65 }, "adherence_pct": 103, "protein_floor_hit": true },
+    { "date": "2026-04-23", "consumed": { "calories": 1632, "protein": 141, "carbs": 144, "fat": 55 }, "goals": { "calories": 1750, "protein": 130, "carbs": 175, "fat": 65 }, "adherence_pct": 93, "protein_floor_hit": true },
+    { "date": "2026-04-24", "consumed": { "calories": 1581, "protein": 128, "carbs": 138, "fat": 54 }, "goals": { "calories": 1750, "protein": 150, "carbs": 175, "fat": 65 }, "adherence_pct": 90, "protein_floor_hit": false },
+    { "date": "2026-04-25", "consumed": { "calories": 1718, "protein": 156, "carbs": 152, "fat": 58 }, "goals": { "calories": 1750, "protein": 150, "carbs": 175, "fat": 65 }, "adherence_pct": 98, "protein_floor_hit": true },
+    { "date": "2026-04-26", "consumed": { "calories": 1689, "protein": 152, "carbs": 148, "fat": 57 }, "goals": { "calories": 1750, "protein": 150, "carbs": 175, "fat": 65 }, "adherence_pct": 97, "protein_floor_hit": true },
+    { "date": "2026-04-27", "consumed": { "calories": 1645, "protein": 149, "carbs": 142, "fat": 56 }, "goals": { "calories": 1750, "protein": 150, "carbs": 175, "fat": 65 }, "adherence_pct": 94, "protein_floor_hit": false },
+    { "date": "2026-04-28", "consumed": { "calories": 1721, "protein": 158, "carbs": 156, "fat": 58 }, "goals": { "calories": 1750, "protein": 150, "carbs": 175, "fat": 65 }, "adherence_pct": 98, "protein_floor_hit": true },
+    { "date": "2026-04-29", "consumed": { "calories": 1612, "protein": 156, "carbs": 138, "fat": 56 }, "goals": { "calories": 1750, "protein": 150, "carbs": 175, "fat": 65 }, "adherence_pct": 92, "protein_floor_hit": true },
+    { "date": "2026-04-30", "consumed": { "calories": 845, "protein": 78, "carbs": 32, "fat": 38 }, "goals": { "calories": 1750, "protein": 150, "carbs": 175, "fat": 65 }, "adherence_pct": 48, "protein_floor_hit": false }
+  ],
+  "summary": {
+    "avg_calories": 1614,
+    "avg_protein": 135,
+    "protein_floor_hit_days": 10,
+    "missing_days": 0
+  }
+}

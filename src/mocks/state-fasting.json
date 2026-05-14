@@ -1,0 +1,12 @@
+{
+  "now": "2026-04-30T15:42:08-05:00",
+  "in_window": true,
+  "phase": "eating",
+  "current_window_open": "2026-04-30T12:00:00-05:00",
+  "next_window_close": "2026-04-30T20:00:00-05:00",
+  "minutes_until_close": 258,
+  "default_schedule": { "start": "12:00", "end": "20:00", "ratio": "16:8" },
+  "log_today": [
+    { "event": "fast_end", "time": "12:00", "label": "Broke fast / eating window opened" }
+  ]
+}

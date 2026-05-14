@@ -1,0 +1,26 @@
+{
+  "window": { "start": "2026-04-17", "end": "2026-04-30", "days": 14 },
+  "points": [
+    { "date": "2026-04-17", "sleep_score": 62, "hrv_ms": 24, "hrv_status": "low", "rhr_bpm": 62, "total_minutes": 372 },
+    { "date": "2026-04-18", "sleep_score": 68, "hrv_ms": 26, "hrv_status": "balanced", "rhr_bpm": 60, "total_minutes": 398 },
+    { "date": "2026-04-19", "sleep_score": 65, "hrv_ms": 25, "hrv_status": "balanced", "rhr_bpm": 61, "total_minutes": 384 },
+    { "date": "2026-04-20", "sleep_score": 71, "hrv_ms": 27, "hrv_status": "balanced", "rhr_bpm": 59, "total_minutes": 412 },
+    { "date": "2026-04-21", "sleep_score": 69, "hrv_ms": 26, "hrv_status": "balanced", "rhr_bpm": 60, "total_minutes": 401 },
+    { "date": "2026-04-22", "sleep_score": 73, "hrv_ms": 28, "hrv_status": "balanced", "rhr_bpm": 58, "total_minutes": 425 },
+    { "date": "2026-04-23", "sleep_score": 70, "hrv_ms": 27, "hrv_status": "balanced", "rhr_bpm": 59, "total_minutes": 408 },
+    { "date": "2026-04-24", "sleep_score": 74, "hrv_ms": 30, "hrv_status": "balanced", "rhr_bpm": 58, "total_minutes": 437 },
+    { "date": "2026-04-25", "sleep_score": 78, "hrv_ms": 33, "hrv_status": "balanced", "rhr_bpm": 56, "total_minutes": 448 },
+    { "date": "2026-04-26", "sleep_score": 76, "hrv_ms": 31, "hrv_status": "balanced", "rhr_bpm": 57, "total_minutes": 421 },
+    { "date": "2026-04-27", "sleep_score": 72, "hrv_ms": 29, "hrv_status": "balanced", "rhr_bpm": 58, "total_minutes": 415 },
+    { "date": "2026-04-28", "sleep_score": 70, "hrv_ms": 28, "hrv_status": "balanced", "rhr_bpm": 59, "total_minutes": 402 },
+    { "date": "2026-04-29", "sleep_score": 73, "hrv_ms": 30, "hrv_status": "balanced", "rhr_bpm": 58, "total_minutes": 419 },
+    { "date": "2026-04-30", "sleep_score": 75, "hrv_ms": 32, "hrv_status": "balanced", "rhr_bpm": 58, "total_minutes": 432 }
+  ],
+  "summary": {
+    "avg_score": 71,
+    "avg_hrv_ms": 29,
+    "avg_rhr_bpm": 59,
+    "best_score": { "date": "2026-04-25", "value": 78 },
+    "worst_score": { "date": "2026-04-17", "value": 62 }
+  }
+}

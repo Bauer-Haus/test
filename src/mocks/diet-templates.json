@@ -1,0 +1,30 @@
+{
+  "doc_updated": "2026-04-10",
+  "cut_start": "2026-04-15",
+  "if_window": { "start": "12:00", "end": "20:00", "default": "16:8" },
+  "phases": [
+    { "name": "Phase 1", "days": [1, 14], "protein_floor_g": 130, "calories": 1700 },
+    { "name": "Phase 2", "days": [15, 28], "protein_floor_g": 150, "calories": 1750 },
+    { "name": "Phase 3", "days": [29, 90], "protein_floor_g": 175, "calories": 1800 }
+  ],
+  "templates": {
+    "breakfast": [
+      { "name": "Greek yogurt + whey + berries", "calories": 310, "protein_g": 35, "carbs_g": 35, "fat_g": 3 },
+      { "name": "Egg + turkey scramble", "calories": 350, "protein_g": 38, "carbs_g": 4, "fat_g": 12 },
+      { "name": "Cottage cheese bowl + whey + fruit", "calories": 320, "protein_g": 50, "carbs_g": 22, "fat_g": 5 },
+      { "name": "Steel cut oats + whey", "calories": 380, "protein_g": 30, "carbs_g": 50, "fat_g": 5 }
+    ],
+    "lunch": [
+      { "name": "Grilled chicken bowl with brown rice and veg", "calories": 520, "protein_g": 48, "carbs_g": 55, "fat_g": 12 },
+      { "name": "Chicken Caesar salad with grilled chicken", "calories": 480, "protein_g": 45, "carbs_g": 18, "fat_g": 22 },
+      { "name": "Tuna + mixed greens + balsamic", "calories": 380, "protein_g": 42, "carbs_g": 12, "fat_g": 18 },
+      { "name": "Turkey wrap with whole-wheat tortilla", "calories": 450, "protein_g": 38, "carbs_g": 42, "fat_g": 14 }
+    ],
+    "dinner": [
+      { "name": "Grilled salmon + roasted veg + small starch", "calories": 580, "protein_g": 45, "carbs_g": 38, "fat_g": 24 },
+      { "name": "Lean beef stir-fry over cauliflower rice", "calories": 520, "protein_g": 48, "carbs_g": 18, "fat_g": 26 },
+      { "name": "Chicken breast + sweet potato + greens", "calories": 540, "protein_g": 50, "carbs_g": 42, "fat_g": 14 },
+      { "name": "Sheet-pan shrimp + zucchini + olive oil", "calories": 460, "protein_g": 42, "carbs_g": 16, "fat_g": 22 }
+    ]
+  }
+}

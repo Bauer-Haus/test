@@ -1,0 +1,24 @@
+{
+  "today": "2026-04-30",
+  "state": "REST_DAY",
+  "last_session": {
+    "date": "2026-04-29",
+    "day": "A",
+    "note": "Push + intervals run. Bench 245x5 felt strong."
+  },
+  "next_session": {
+    "day": "B",
+    "title": "Upper Pull + Run",
+    "expected_date": "2026-05-01",
+    "scheduled_time": "10:00 AM",
+    "calendar_event_id": "iCloud:0xEF42A1",
+    "first_lift": {
+      "name": "Single-arm seated cable row",
+      "top_working_weight_lb": 180
+    },
+    "purpose": "Back, posterior shoulders, biceps. Reflects current routine with bicep volume trimmed and face pulls added.",
+    "total_working_sets": 19,
+    "duration_estimate_minutes": [55, 60],
+    "run_plan": "30 min Peloton, Z2 or interval"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "user_emails": [
+    "user@example.com",
+    "user.work@example.com"
+  ],
+  "timezone": "America/Chicago",
+  "default_if_window": { "start": "12:00", "end": "20:00" },
+  "calendar_blocklist": ["Acme Corp All-Hands"],
+  "voice_model": "llama3.1:latest",
+  "claude_model_primary": "claude-sonnet-4-6",
+  "wake_watcher": {
+    "start_time": "05:30",
+    "end_time": "11:30",
+    "interval_minutes": 15
+  }
+}
