@@ -1,0 +1,15 @@
+{
+  "date": "2026-04-30",
+  "consumed": { "calories": 845, "protein": 78, "carbs": 32, "fat": 38 },
+  "goals": { "calories": 1750, "protein": 150, "carbs": 175, "fat": 65 },
+  "remaining": { "calories": 905, "protein": 72, "carbs": 143, "fat": 27 },
+  "phase": {
+    "name": "Phase 2",
+    "day": 16,
+    "cut_start": "2026-04-15",
+    "protein_floor_g": 150
+  },
+  "meals_with_food": ["lunch"],
+  "eating_window_inferred": true,
+  "fetched_at": "2026-04-30T15:42:08-05:00"
+}
